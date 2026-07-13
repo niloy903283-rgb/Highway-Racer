@@ -24,7 +24,24 @@ let score = 0;
 let gameOver = false;
 
 const keys = {};
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
 
+leftBtn.addEventListener("touchstart", () => {
+    keys["ArrowLeft"] = true;
+});
+
+leftBtn.addEventListener("touchend", () => {
+    keys["ArrowLeft"] = false;
+});
+
+rightBtn.addEventListener("touchstart", () => {
+    keys["ArrowRight"] = true;
+});
+
+rightBtn.addEventListener("touchend", () => {
+    keys["ArrowRight"] = false;
+});
 document.addEventListener("keydown", (e)=>{
     keys[e.key]=true;
 });
