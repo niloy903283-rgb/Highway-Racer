@@ -1,6 +1,10 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+// Images
+const playerImage = new Image();
+playerImage.src = "assets/player.png";
+
 // Player
 const player = {
     x: 155,
@@ -17,8 +21,7 @@ const enemy = {
     width: 50,
     height: 90,
     speed: 5
-};const playerImage = new Image();
-playerImage.src = "assets/player.png";
+};
 
 let roadOffset = 0;
 let score = 0;
@@ -26,22 +29,36 @@ let gameOver = false;
 
 const keys = {};
 
+// Mobile Buttons
 const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
 
 if (leftBtn && rightBtn) {
-    leftBtn.addEventListener("touchstart", () => keys["ArrowLeft"] = true);
-    leftBtn.addEventListener("touchend", () => keys["ArrowLeft"] = false);
 
-    rightBtn.addEventListener("touchstart", () => keys["ArrowRight"] = true);
-    rightBtn.addEventListener("touchend", () => keys["ArrowRight"] = false);
+    leftBtn.addEventListener("touchstart", () => {
+        keys["ArrowLeft"] = true;
+    });
+
+    leftBtn.addEventListener("touchend", () => {
+        keys["ArrowLeft"] = false;
+    });
+
+    rightBtn.addEventListener("touchstart", () => {
+        keys["ArrowRight"] = true;
+    });
+
+    rightBtn.addEventListener("touchend", () => {
+        keys["ArrowRight"] = false;
+    });
+
 }
 
-document.addEventListener("keydown", e => {
+// Keyboard
+document.addEventListener("keydown", (e) => {
     keys[e.key] = true;
 });
 
-document.addEventListener("keyup", e => {
+document.addEventListener("keyup", (e) => {
     keys[e.key] = false;
 });function update() {
 
@@ -58,13 +75,13 @@ document.addEventListener("keyup", e => {
 
     enemy.y += enemy.speed;
 
-    if (enemy.y > 700) {
+    if (enemy.y > canvas.height) {
         enemy.y = -100;
         enemy.x = Math.random() * 240 + 40;
         score++;
     }
 
-    // Collision Detection
+    // Collision
     if (
         player.x < enemy.x + enemy.width &&
         player.x + player.width > enemy.x &&
@@ -80,26 +97,16 @@ function drawRoad() {
     ctx.fillStyle = "#555";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#ffffff";
 
     for (let i = -80; i < canvas.height; i += 80) {
         ctx.fillRect(canvas.width / 2 - 5, i + roadOffset, 10, 40);
     }
+
 }
 
 function drawPlayer() {
 
-    if (playerImage.complete) {
-        ctx.drawImage(
-            playerImage,
-            player.x,
-            player.y,
-            player.width,
-            player.height
-        );
-    } else {
-        // ছবি লোড না হলে অস্থায়ীভাবে লাল বক্স দেখাবে
-        function drawPlayer() {
     ctx.drawImage(
         playerImage,
         player.x,
@@ -107,31 +114,39 @@ function drawPlayer() {
         player.width,
         player.height
     );
-}
-    }
 
-}
 }
 
 function drawEnemy() {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+
+    ctx.fillStyle = "#0066ff";
+    ctx.fillRect(
+        enemy.x,
+        enemy.y,
+        enemy.width,
+        enemy.height
+    );
+
 }function drawScore() {
+
     ctx.fillStyle = "white";
     ctx.font = "22px Arial";
     ctx.fillText("Score: " + score, 15, 35);
+
 }
 
 function drawGameOver() {
+
     ctx.fillStyle = "rgba(0,0,0,0.7)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "white";
     ctx.font = "36px Arial";
-    ctx.fillText("GAME OVER", 60, 300);
+    ctx.fillText("GAME OVER", 55, 300);
 
     ctx.font = "22px Arial";
     ctx.fillText("Score: " + score, 120, 340);
+
 }
 
 function gameLoop() {
@@ -151,6 +166,10 @@ function gameLoop() {
     }
 
     requestAnimationFrame(gameLoop);
+
 }
 
-gameLoop();
+// গাড়ির ছবি লোড হওয়ার পর গেম শুরু হবে
+playerImage.onload = function () {
+    gameLoop();
+};
