@@ -66,20 +66,20 @@ canvas {
 
 /* Glassmorphism Panel */
 .glass {
-    background: rgba(10, 10, 15, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 40px;
     text-align: center;
     color: white;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
-    min-width: 320px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.05);
+    min-width: 340px;
 }
 
 .game-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 900;
     font-style: italic;
     background: linear-gradient(45deg, #ff0055, #ffaa00);
@@ -93,19 +93,42 @@ canvas {
 
 .subtitle {
     font-size: 1rem;
-    color: #aaa;
+    color: #ccc;
     margin-bottom: 30px;
     letter-spacing: 4px;
     text-transform: uppercase;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 900;
     color: #fff;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+.pulsing-text {
+    animation: pulse 1.5s infinite;
+    font-style: italic;
+    color: #ffaa00;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 15px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid #000;
+}
+
+#loadingFill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff0055, #ffaa00);
+    transition: width 0.2s linear;
 }
 
 /* Buttons */
@@ -135,7 +158,7 @@ h2 {
 .btn:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 .btn:active {
@@ -157,7 +180,7 @@ h2 {
 .settings-options {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
     margin-bottom: 30px;
     width: 100%;
     text-align: left;
@@ -180,7 +203,7 @@ h2 {
     position: relative;
     width: 50px;
     height: 26px;
-    background-color: #333;
+    background-color: #444;
     border-radius: 34px;
     transition: .4s;
 }
@@ -207,7 +230,7 @@ input:checked + .toggle-slider:before {
 
 /* Stats */
 .stats {
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.4);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -216,7 +239,7 @@ input:checked + .toggle-slider:before {
 }
 
 .stats p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 10px 0;
     color: #ccc;
     display: flex;
@@ -246,7 +269,7 @@ input:checked + .toggle-slider:before {
     justify-content: center;
     gap: 40px;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: white;
     text-shadow: 2px 2px 4px #000;
@@ -265,12 +288,12 @@ input:checked + .toggle-slider:before {
 }
 
 .text-pop {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 900;
     font-style: italic;
     color: #fff;
     text-transform: uppercase;
-    text-shadow: 0 0 10px #ff0055, 2px 2px 0px #000;
+    text-shadow: 0 0 15px #ff0055, 3px 3px 0px #000;
     animation: popInOut 1s ease-in-out forwards;
 }
 
@@ -283,23 +306,23 @@ input:checked + .toggle-slider:before {
 .hud-fuel-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .fuel-label {
     color: #fff;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 #fuelBar {
-    width: 200px;
-    height: 15px;
-    background: #333;
+    width: 250px;
+    height: 20px;
+    background: #222;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #000;
@@ -308,24 +331,30 @@ input:checked + .toggle-slider:before {
 #fuelFill {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #ff0000, #00ff00);
-    transition: width 0.1s linear, background-color 0.3s;
+    background: linear-gradient(90deg, #ff0000, #ffaa00, #00ff00);
+    transition: width 0.1s linear, background 0.3s;
 }
 
 .control-btn {
     pointer-events: auto;
     position: absolute;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255,255,255,0.3);
     color: white;
-    font-size: 1.5rem;
-    width: 40px;
-    height: 40px;
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
 .top-right {
@@ -336,41 +365,43 @@ input:checked + .toggle-slider:before {
 /* Mobile Controls */
 #mobileControls {
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 30px;
     pointer-events: none;
     z-index: 5;
 }
 
 .touch-btn {
     pointer-events: auto;
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 90px;
+    height: 90px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .touch-btn:active {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0.95);
 }
 
 /* Countdown */
 #countdown {
-    font-size: 8rem;
+    font-size: 10rem;
     font-weight: 900;
     color: white;
-    text-shadow: 0 0 20px #ff0055, 4px 4px 0px #000;
+    text-shadow: 0 0 30px #ff0055, 5px 5px 0px #000;
     animation: pulse 1s infinite;
 }
 
@@ -396,11 +427,13 @@ input:checked + .toggle-slider:before {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .hud-top {
-        font-size: 0.9rem;
+        font-size: 1rem;
         gap: 15px;
     }
-    #fuelBar { width: 120px; }
-    .game-title { font-size: 2rem; }
-    .glass { padding: 20px; min-width: 280px;}
-    .hud-stat { display: flex; flex-direction: column; align-items: center;}
+    #fuelBar { width: 140px; }
+    .game-title { font-size: 2.2rem; }
+    .glass { padding: 25px; min-width: 300px; }
+    .hud-stat { display: flex; flex-direction: column; align-items: center; }
+    .touch-btn { width: 70px; height: 70px; font-size: 2rem; }
+    #countdown { font-size: 7rem; }
 }
