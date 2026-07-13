@@ -13,6 +13,32 @@
 <canvas id="game" width="360" height="640"></canvas>
 
 <script src="game.js"></script>
-
+<div id="controls">
+    <button id="leftBtn">⬅</button>
+    <button id="rightBtn">➡</button>
+</div>
 </body>
 </html>
+#controls{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:20px;
+}
+
+#controls button{
+    width:80px;
+    height:80px;
+    font-size:35px;
+    border:none;
+    border-radius:50%;
+    background:#2196f3;
+    color:white;
+    font-weight:bold;
+}
+
+#controls button:active{
+    background:#0d6efd;
+}
