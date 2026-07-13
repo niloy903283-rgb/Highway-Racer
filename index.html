@@ -1,21 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Highway Racer</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Highway Racer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="gameContainer">
+        <!-- Main Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
 
-<canvas id="game" width="360" height="640"></canvas>
+        <!-- UI Overlays -->
+        <div id="uiLayer">
+            
+            <!-- Heads Up Display (HUD) -->
+            <div id="hud" class="hidden">
+                <div class="hud-top">
+                    <div class="hud-stat">SCORE: <span id="scoreVal">0</span></div>
+                    <div class="hud-stat">BEST: <span id="highScoreVal">0</span></div>
+                    <div class="hud-stat">DIST: <span id="distVal">0</span>m</div>
+                </div>
+                <div class="hud-center">
+                    <div id="comboText" class="hidden text-pop">Combo x<span id="comboVal">1</span>!</div>
+                    <div id="nearMissText" class="hidden text-pop">Near Miss! +50</div>
+                </div>
+                <div class="hud-bottom">
+                    <div class="hud-fuel-container">
+                        <span class="fuel-label">FUEL</span>
+                        <div id="fuelBar"><div id="fuelFill"></div></div>
+                    </div>
+                </div>
+                <button id="pauseBtn" class="control-btn top-right">⏸</button>
+            </div>
 
-<div id="controls">
-  <button id="leftBtn">⬅</button>
-  <button id="rightBtn">➡</button>
-</div>
+            <!-- Start Menu -->
+            <div id="startMenu" class="menu panel glass">
+                <h1 class="game-title">HIGHWAY RACER</h1>
+                <p class="subtitle">Ultimate 2D Procedural Edition</p>
+                <div class="menu-buttons">
+                    <button id="playBtn" class="btn primary-btn">PLAY</button>
+                    <button id="settingsBtn" class="btn">SETTINGS</button>
+                </div>
+            </div>
 
-<script src="game.js"></script>
+            <!-- Settings Menu -->
+            <div id="settingsMenu" class="menu panel glass hidden">
+                <h2>SETTINGS</h2>
+                <div class="settings-options">
+                    <label class="toggle-label">
+                        Sound Effects & Music
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <label class="toggle-label">
+                        Visual Effects (Particles/Weather)
+                        <input type="checkbox" id="vfxToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <button id="closeSettingsBtn" class="btn">BACK</button>
+            </div>
 
+            <!-- Pause Menu -->
+            <div id="pauseMenu" class="menu panel glass hidden">
+                <h2>PAUSED</h2>
+                <div class="menu-buttons">
+                    <button id="resumeBtn" class="btn primary-btn">RESUME</button>
+                    <button id="quitBtn" class="btn">MAIN MENU</button>
+                </div>
+            </div>
+
+            <!-- Game Over Menu -->
+            <div id="gameOverMenu" class="menu panel glass hidden">
+                <h2>GAME OVER</h2>
+                <div class="stats">
+                    <p>Final Score: <span id="goScore" class="highlight">0</span></p>
+                    <p>Best Score: <span id="goBestScore" class="highlight">0</span></p>
+                    <p>Distance: <span id="goDist" class="highlight">0</span>m</p>
+                </div>
+                <div class="menu-buttons">
+                    <button id="restartBtn" class="btn primary-btn">PLAY AGAIN</button>
+                    <button id="menuBtn" class="btn">MAIN MENU</button>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div id="countdown" class="hidden">3</div>
+        </div>
+
+        <!-- Mobile Controls (Visible only on touch devices) -->
+        <div id="mobileControls" class="hidden">
+            <button id="btnLeft" class="touch-btn">◀</button>
+            <button id="btnRight" class="touch-btn">▶</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
 </body>
 </html>
