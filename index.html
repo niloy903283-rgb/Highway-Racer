@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Highway Racer</title>
+    <title>Highway Racer Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,6 +14,14 @@
         <!-- UI Overlays -->
         <div id="uiLayer">
             
+            <!-- Loading Screen -->
+            <div id="loadingMenu" class="menu panel glass">
+                <h2 class="pulsing-text">INITIALIZING ENGINE...</h2>
+                <div class="progress-bar-container">
+                    <div id="loadingFill"></div>
+                </div>
+            </div>
+
             <!-- Heads Up Display (HUD) -->
             <div id="hud" class="hidden">
                 <div class="hud-top">
@@ -35,7 +43,7 @@
             </div>
 
             <!-- Start Menu -->
-            <div id="startMenu" class="menu panel glass">
+            <div id="startMenu" class="menu panel glass hidden">
                 <h1 class="game-title">HIGHWAY RACER</h1>
                 <p class="subtitle">Ultimate 2D Procedural Edition</p>
                 <div class="menu-buttons">
@@ -54,7 +62,7 @@
                         <span class="toggle-slider"></span>
                     </label>
                     <label class="toggle-label">
-                        Visual Effects (Particles/Weather)
+                        Visual Effects (Weather/Particles)
                         <input type="checkbox" id="vfxToggle" checked>
                         <span class="toggle-slider"></span>
                     </label>
