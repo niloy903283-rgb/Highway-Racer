@@ -17,7 +17,8 @@ const enemy = {
     width: 50,
     height: 90,
     speed: 5
-};
+};const playerImage = new Image();
+playerImage.src = "assets/player.png";
 
 let roadOffset = 0;
 let score = 0;
@@ -87,8 +88,22 @@ function drawRoad() {
 }
 
 function drawPlayer() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
+
+    if (playerImage.complete) {
+        ctx.drawImage(
+            playerImage,
+            player.x,
+            player.y,
+            player.width,
+            player.height
+        );
+    } else {
+        // ছবি লোড না হলে অস্থায়ীভাবে লাল বক্স দেখাবে
+        ctx.fillStyle = "red";
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+}
 }
 
 function drawEnemy() {
