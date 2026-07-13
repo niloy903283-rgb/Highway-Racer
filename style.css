@@ -20,3 +20,26 @@ canvas{
     border-radius:10px;
     box-shadow:0 0 20px rgba(0,0,0,.6);
 }
+#controls{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+#controls button{
+    width: 80px;
+    height: 80px;
+    font-size: 35px;
+    border: none;
+    border-radius: 50%;
+    background: #2196f3;
+    color: white;
+    font-weight: bold;
+}
+
+#controls button:active{
+    background: #0d6efd;
+}
