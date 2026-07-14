@@ -3,128 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Highway Racer Pro</title>
+    <title>HIGHWAY RACER</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="gameContainer">
+    <div id="game-container">
         <!-- Main Game Canvas -->
-        <canvas id="gameCanvas"></canvas>
-
+        <canvas id="gameCanvas" width="400" height="800"></canvas>
+        
         <!-- UI Overlays -->
-        <div id="uiLayer">
+        <div id="ui-layer">
             
-            <!-- Loading Screen -->
-            <div id="loadingMenu" class="menu panel glass">
-                <h2 class="pulsing-text">INITIALIZING ENGINE...</h2>
-                <div class="progress-bar-container">
-                    <div id="loadingFill"></div>
-                </div>
-            </div>
-
             <!-- Heads Up Display (HUD) -->
             <div id="hud" class="hidden">
                 <div class="hud-top">
-                    <div class="hud-stat">SCORE: <span id="scoreVal">0</span></div>
-                    <div class="hud-stat">BEST: <span id="highScoreVal">0</span></div>
-                    <div class="hud-stat">DIST: <span id="distVal">0</span>m</div>
+                    <div class="score-container">
+                        <span id="score-text">0</span>
+                    </div>
+                    <button id="btn-pause" class="icon-btn">⏸</button>
                 </div>
-                <div class="hud-center">
-                    <div id="comboText" class="hidden text-pop">Combo x<span id="comboVal">1</span>!</div>
-                    <div id="nearMissText" class="hidden text-pop">Near Miss! +50</div>
-                </div>
-                <div class="hud-bottom">
-                    <div class="hud-fuel-container">
-                        <span class="fuel-label">FUEL</span>
-                        <div id="fuelBar"><div id="fuelFill"></div></div>
+                <div class="hud-stats">
+                    <div class="fuel-container">
+                        <div class="fuel-label">FUEL</div>
+                        <div class="fuel-track">
+                            <div id="fuel-bar"></div>
+                        </div>
+                    </div>
+                    <div id="combo-container" class="hidden">
+                        COMBO x<span id="combo-text">1</span>
                     </div>
                 </div>
-                <button id="pauseBtn" class="control-btn top-right">⏸</button>
+                <div id="weather-alert" class="hidden">NIGHT</div>
             </div>
 
             <!-- Start Menu -->
-            <div id="startMenu" class="menu panel glass hidden">
-                <h1 class="game-title">HIGHWAY RACER</h1>
-                <p class="subtitle" style="margin-bottom: 5px;">Ultimate 2D Procedural Edition</p>
+            <div id="start-menu" class="screen glass">
+                <div class="branding">HIGHWAY RACER</div>
+                <div class="high-score">Best: <span id="start-high-score">0</span></div>
                 
-                <!-- Credit added below the title -->
-                <div style="margin-bottom: 25px; line-height: 1.4;">
-                    <span style="font-size: 0.9rem; color: #ccc;">Created by</span><br>
-                    <span style="font-size: 1.1rem; color: #ffaa00; font-weight: 700;">DiaryOfParvez</span>
+                <button id="btn-play" class="primary-btn">PLAY NOW</button>
+                <button class="reward-btn claim-reward">🎁 Claim Reward</button>
+                
+                <div class="controls-info">
+                    <p>Desktop: Arrows / A D to Steer, Space to Brake</p>
+                    <p>Mobile: Use On-Screen Buttons</p>
                 </div>
 
-                <div class="menu-buttons">
-                    <button id="playBtn" class="btn primary-btn">PLAY</button>
-                    <button id="settingsBtn" class="btn">SETTINGS</button>
-                    
-                    <!-- Official Website Button -->
-                    <a href="https://omg10.com/4/8195678" target="_blank" class="btn" style="text-decoration: none; display: flex; justify-content: center; align-items: center; box-sizing: border-box;">
-                        OFFICIAL WEBSITE
-                    </a>
-                    
-                    <!-- More Games Button -->
-                    <a href="https://omg10.com/4/8195678" target="_blank" class="btn" style="text-decoration: none; display: flex; justify-content: center; align-items: center; box-sizing: border-box;">
-                        MORE GAMES
-                    </a>
-                </div>
-
-                <!-- Footer with Version and Copyright -->
-                <div style="margin-top: 25px; font-size: 0.8rem; color: #999; line-height: 1.5;">
-                    <p>Version 1.0.0</p>
-                    <p style="margin-top: 8px;">&copy; 2026 DiaryOfParvez</p>
-                    <p>Developed by DiaryOfParvez</p>
+                <div class="footer">
+                    <p>Created & Owned By</p>
+                    <p class="owner">DiaryOfParvez</p>
+                    <p>Copyright &copy; 2026 DiaryOfParvez</p>
+                    <p>All Rights Reserved. | Version 1.0.0</p>
                 </div>
             </div>
 
-            <!-- Settings Menu -->
-            <div id="settingsMenu" class="menu panel glass hidden">
-                <h2>SETTINGS</h2>
-                <div class="settings-options">
-                    <label class="toggle-label">
-                        Sound Effects & Music
-                        <input type="checkbox" id="soundToggle" checked>
-                        <span class="toggle-slider"></span>
-                    </label>
-                    <label class="toggle-label">
-                        Visual Effects (Weather/Particles)
-                        <input type="checkbox" id="vfxToggle" checked>
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <button id="closeSettingsBtn" class="btn">BACK</button>
+            <!-- Countdown Screen -->
+            <div id="countdown-screen" class="screen hidden">
+                <div id="countdown-text">3</div>
             </div>
 
             <!-- Pause Menu -->
-            <div id="pauseMenu" class="menu panel glass hidden">
+            <div id="pause-menu" class="screen glass hidden">
                 <h2>PAUSED</h2>
-                <div class="menu-buttons">
-                    <button id="resumeBtn" class="btn primary-btn">RESUME</button>
-                    <button id="quitBtn" class="btn">MAIN MENU</button>
-                </div>
+                <button id="btn-resume" class="primary-btn">RESUME</button>
+                <button id="btn-restart-pause" class="secondary-btn">RESTART</button>
             </div>
 
             <!-- Game Over Menu -->
-            <div id="gameOverMenu" class="menu panel glass hidden">
-                <h2>GAME OVER</h2>
-                <div class="stats">
-                    <p>Final Score: <span id="goScore" class="highlight">0</span></p>
-                    <p>Best Score: <span id="goBestScore" class="highlight">0</span></p>
-                    <p>Distance: <span id="goDist" class="highlight">0</span>m</p>
+            <div id="game-over-menu" class="screen glass hidden">
+                <h2>CRASHED!</h2>
+                <div class="stats-box">
+                    <p>Score: <span id="final-score">0</span></p>
+                    <p>High Score: <span id="final-high-score">0</span></p>
                 </div>
-                <div class="menu-buttons">
-                    <button id="restartBtn" class="btn primary-btn">PLAY AGAIN</button>
-                    <button id="menuBtn" class="btn">MAIN MENU</button>
+                
+                <button id="btn-restart" class="primary-btn">PLAY AGAIN</button>
+                <button class="reward-btn claim-reward">🎁 Claim Reward</button>
+
+                <div class="footer">
+                    <p>Created & Owned By</p>
+                    <p class="owner">DiaryOfParvez</p>
                 </div>
             </div>
 
-            <!-- Countdown -->
-            <div id="countdown" class="hidden">3</div>
-        </div>
+            <!-- Mobile Controls -->
+            <div id="mobile-controls" class="hidden">
+                <button id="btn-left" class="control-btn">◀</button>
+                <button id="btn-brake" class="control-btn brake-btn">BRAKE</button>
+                <button id="btn-right" class="control-btn">▶</button>
+            </div>
 
-        <!-- Mobile Controls (Visible only on touch devices) -->
-        <div id="mobileControls" class="hidden">
-            <button id="btnLeft" class="touch-btn">◀</button>
-            <button id="btnRight" class="touch-btn">▶</button>
         </div>
     </div>
 
